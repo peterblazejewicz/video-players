@@ -16,6 +16,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@blazejewicz/jsonp-library": [
+        "libs/jsonp-library/src/index.ts"
+      ]
     }
   },
   "exclude": [
