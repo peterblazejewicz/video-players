@@ -18,6 +18,9 @@
     "paths": {
       "@blazejewicz/jsonp-library": [
         "libs/jsonp-library/src/index.ts"
+      ],
+      "@blazejewicz/google-apis": [
+        "libs/google-apis/src/index.ts"
       ]
     }
   },

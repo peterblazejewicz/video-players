@@ -10,6 +10,9 @@
   "projects": {
     "jsonp-library": {
       "tags": []
+    },
+    "google-apis": {
+      "tags": []
     }
   }
 }

@@ -30,6 +30,34 @@
           }
         }
       }
+    },
+    "google-apis": {
+      "root": "libs/google-apis",
+      "sourceRoot": "libs/google-apis/src",
+      "projectType": "library",
+      "prefix": "blazejewicz",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/google-apis/src/test.ts",
+            "tsConfig": "libs/google-apis/tsconfig.spec.json",
+            "karmaConfig": "libs/google-apis/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/google-apis/tsconfig.lib.json",
+              "libs/google-apis/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
