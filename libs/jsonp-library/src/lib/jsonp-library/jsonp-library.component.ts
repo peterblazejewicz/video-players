@@ -3,10 +3,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'jsonp-library',
-  template: `
-    <p>jsonp-library works!</p>
-  `,
-  styles: []
+  template: '',
+  styles: [
+    `
+      :host {
+        display: none;
+      }
+    `
+  ]
 })
 export class JsonpLibraryComponent implements OnInit {
   private _libraryUrl: string;
