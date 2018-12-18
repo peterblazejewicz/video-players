@@ -8,9 +8,8 @@ describe('GoogleYoutubeApiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GoogleYoutubeApiComponent ]
-    })
-    .compileComponents();
+      declarations: [GoogleYoutubeApiComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

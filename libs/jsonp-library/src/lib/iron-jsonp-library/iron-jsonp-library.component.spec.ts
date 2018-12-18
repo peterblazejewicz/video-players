@@ -8,9 +8,8 @@ describe('IronJsonpLibraryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IronJsonpLibraryComponent ]
-    })
-    .compileComponents();
+      declarations: [IronJsonpLibraryComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
