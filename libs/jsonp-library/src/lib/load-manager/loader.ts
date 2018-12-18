@@ -1,13 +1,10 @@
 export class Loader {
-  private notifiers: Function[] = [];
   private callbackMacro = '%%callback%%'.toLowerCase();
-  private loaded = false;
-
   private error: Error;
-
-  private script: HTMLElement;
-
+  private loaded = false;
+  private notifiers: Function[] = [];
   private result: any;
+  private script: HTMLElement;
 
   constructor(name: string, private url: string, private callbackName: string) {
     // callback is specified either as callback name

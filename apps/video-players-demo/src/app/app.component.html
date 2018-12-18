@@ -17,4 +17,8 @@ opinionated approach to application project structure and patterns.
 <a href="https://nrwl.io/nx"
   >Watch a 5-minute video on how to get started with Nx.</a
 >
-<google-youtube-api></google-youtube-api>
+<jsonp-library
+  [libraryUrl]="'https://apis.google.com/js/plusone.js?onload=%%callback%%'"
+  [notifyEventName]="'api-load'"
+  (libraryLoaded)="libraryLoaded($event)"
+></jsonp-library>

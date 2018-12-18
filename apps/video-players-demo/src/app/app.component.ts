@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'video-players-demo';
+
+  public libraryLoaded(loaded: boolean) {
+    console.log(`Library loaded: ${loaded}`);
+  }
 }

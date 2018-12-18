@@ -1,6 +1,14 @@
+import { Injectable } from '@angular/core';
 import { Loader } from './loader';
 
-export class LoadManager {
+function nameFromUrl(url: string) {
+  return url.replace(/[\:\/\%\?\&\.\=\-\,]/g, '_') + '_api';
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoadManagerService {
   readonly apiMap: { [name: string]: Loader } = {};
 
   /**
@@ -16,15 +24,10 @@ export class LoadManager {
     notifyCallback: (error: Error, result: any) => void,
     jsonpCallbackName?: string
   ) {
-    const name = this.nameFromUrl(url);
+    const name = nameFromUrl(url);
     if (!this.apiMap[name]) {
       this.apiMap[name] = new Loader(name, url, jsonpCallbackName);
     }
-
     this.apiMap[name].requestNotify(notifyCallback);
-  }
-
-  private nameFromUrl(url: string) {
-    return url.replace(/[\:\/\%\?\&\.\=\-\,]/g, '_') + '_api';
   }
 }

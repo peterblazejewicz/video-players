@@ -1,13 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { GoogleApisModule } from '@blazejewicz/google-apis';
+import { JsonpLibraryModule } from '@blazejewicz/jsonp-library';
+import { NxModule } from '@nrwl/nx';
 
 import { AppComponent } from './app.component';
-import { NxModule } from '@nrwl/nx';
-import { GoogleApisModule } from '@blazejewicz/google-apis';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, NxModule.forRoot(), GoogleApisModule],
+  imports: [
+    BrowserModule,
+    NxModule.forRoot(),
+    GoogleApisModule,
+    JsonpLibraryModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

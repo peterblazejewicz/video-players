@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { LoadManagerService } from '../load-manager/load-manager.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,7 +11,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
         display: none;
       }
     `
-  ]
+  ],
+  providers: [LoadManagerService]
 })
 export class JsonpLibraryComponent implements OnInit {
   private _libraryUrl: string;
@@ -27,14 +29,15 @@ export class JsonpLibraryComponent implements OnInit {
   @Input()
   set libraryUrl(libraryUrl: string) {
     this._libraryUrl = libraryUrl;
-    if (this.ready && libraryUrl) {
-      this.loadLibrary();
-    }
+    this.libraryUrlChanged(this._libraryUrl);
   }
 
   get libraryUrl(): string {
     return this._libraryUrl;
   }
+
+  @Output()
+  libraryErrorMessage: EventEmitter<string> = new EventEmitter<string>();
 
   /**
    * Set if library requires specific callback name.
@@ -61,6 +64,11 @@ export class JsonpLibraryComponent implements OnInit {
    */
   @Output()
   notifyEvent: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  libraryLoaded: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(private loadManager: LoadManagerService) {}
   ngOnInit() {
     this.ready = true;
     if (this.libraryUrl) {
@@ -72,5 +80,26 @@ export class JsonpLibraryComponent implements OnInit {
    * @private
    * @memberof JsonpLibraryComponent
    */
-  private loadLibrary() {}
+  private loadLibrary() {
+    this.loadManager.require(
+      this.libraryUrl,
+      this.libraryLoadCallback.bind(this),
+      this.callbackName
+    );
+  }
+
+  private libraryLoadCallback(error: Error, result: any) {
+    if (error) {
+      this.libraryErrorMessage.emit(error.message);
+    } else {
+      this.libraryLoaded.emit(true);
+    }
+    this.notifyEvent.emit(result);
+  }
+
+  private libraryUrlChanged(_url: string) {
+    if (this.ready && this.libraryUrl) {
+      this.loadLibrary();
+    }
+  }
 }
