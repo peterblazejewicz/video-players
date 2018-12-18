@@ -13,6 +13,12 @@
     },
     "google-apis": {
       "tags": []
+    },
+    "video-players-demo": {
+      "tags": []
+    },
+    "video-players-demo-e2e": {
+      "tags": []
     }
   }
 }

@@ -58,6 +58,137 @@
           }
         }
       }
+    },
+    "video-players-demo": {
+      "root": "apps/video-players-demo/",
+      "sourceRoot": "apps/video-players-demo/src",
+      "projectType": "application",
+      "prefix": "blazejewicz",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/video-players-demo",
+            "index": "apps/video-players-demo/src/index.html",
+            "main": "apps/video-players-demo/src/main.ts",
+            "polyfills": "apps/video-players-demo/src/polyfills.ts",
+            "tsConfig": "apps/video-players-demo/tsconfig.app.json",
+            "assets": [
+              "apps/video-players-demo/src/favicon.ico",
+              "apps/video-players-demo/src/assets"
+            ],
+            "styles": [
+              "apps/video-players-demo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/video-players-demo/src/environments/environment.ts",
+                  "with": "apps/video-players-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "video-players-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "video-players-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "video-players-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/video-players-demo/src/test.ts",
+            "polyfills": "apps/video-players-demo/src/polyfills.ts",
+            "tsConfig": "apps/video-players-demo/tsconfig.spec.json",
+            "karmaConfig": "apps/video-players-demo/karma.conf.js",
+            "styles": [
+              "apps/video-players-demo/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/video-players-demo/src/favicon.ico",
+              "apps/video-players-demo/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/video-players-demo/tsconfig.app.json",
+              "apps/video-players-demo/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "video-players-demo-e2e": {
+      "root": "apps/video-players-demo-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/video-players-demo-e2e/protractor.conf.js",
+            "devServerTarget": "video-players-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "video-players-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/video-players-demo-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
