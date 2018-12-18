@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   // tslint:disable-next-line:component-selector
   selector: 'google-youtube-api',
   template: `
-    <iron-jsonp-library></iron-jsonp-library>
+    <jsonp-library></jsonp-library>
   `,
   styles: []
 })

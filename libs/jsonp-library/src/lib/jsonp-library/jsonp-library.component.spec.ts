@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IronJsonpLibraryComponent } from './iron-jsonp-library.component';
+import { JsonpLibraryComponent } from './jsonp-library.component';
 
-describe('IronJsonpLibraryComponent', () => {
-  let component: IronJsonpLibraryComponent;
-  let fixture: ComponentFixture<IronJsonpLibraryComponent>;
+describe('JsonpLibraryComponent', () => {
+  let component: JsonpLibraryComponent;
+  let fixture: ComponentFixture<JsonpLibraryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [IronJsonpLibraryComponent]
+      declarations: [JsonpLibraryComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IronJsonpLibraryComponent);
+    fixture = TestBed.createComponent(JsonpLibraryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

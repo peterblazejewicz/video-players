@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'iron-jsonp-library',
+  selector: 'jsonp-library',
   template: `
-    <p>iron-jsonp-library works!</p>
+    <p>jsonp-library works!</p>
   `,
   styles: []
 })
-export class IronJsonpLibraryComponent implements OnInit {
+export class JsonpLibraryComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

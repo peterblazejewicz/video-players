@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IronJsonpLibraryComponent } from './iron-jsonp-library/iron-jsonp-library.component';
+import { JsonpLibraryComponent } from './jsonp-library/jsonp-library.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [IronJsonpLibraryComponent],
-  exports: [IronJsonpLibraryComponent]
+  declarations: [JsonpLibraryComponent],
+  exports: [JsonpLibraryComponent]
 })
 export class JsonpLibraryModule {}
