@@ -1,12 +1,27 @@
 export class Loader {
   private callbackMacro = '%%callback%%'.toLowerCase();
-  private error: Error;
+  private _error: Error;
   private loaded = false;
   private notifiers: Function[] = [];
   private result: any;
   private script: HTMLElement;
 
-  constructor(name: string, private url: string, private callbackName: string) {
+  get error(): Error {
+    return this._error;
+  }
+
+  /**
+   *Creates an instance of Loader.
+   * @param {string} name
+   * @param {string} url
+   * @param {(string | undefined)} callbackName
+   * @memberof Loader
+   */
+  constructor(
+    name: string,
+    private url: string,
+    private callbackName: string | undefined
+  ) {
     // callback is specified either as callback name
     // or computed dynamically if url has callbackMacro in it
     if (!callbackName) {
@@ -14,8 +29,8 @@ export class Loader {
         callbackName = name + '_loaded';
         url = url.replace(this.callbackMacro, callbackName);
       } else {
-        this.error = new Error(
-          'JsonpLibraryBehavior a %%callback%% parameter is required in libraryUrl'
+        this._error = new Error(
+          'JsonpLibrary a %%callback%% parameter is required in libraryUrl'
         );
         // fallback to listening to script.load
         return;
@@ -42,6 +57,7 @@ export class Loader {
     const script: HTMLScriptElement = document.createElement('script');
     script.src = url;
     script.onerror = this.handleError.bind(this);
+    script.setAttribute('jsonp-library', '');
     const scriptTag: HTMLElement =
       document.querySelector('script') || document.body;
     scriptTag.parentNode.insertBefore(script, scriptTag);
@@ -53,7 +69,7 @@ export class Loader {
   }
 
   private handleError(_event: any) {
-    this.error = new Error('Library failed to load');
+    this._error = new Error('Library failed to load');
     this.notifyAll();
     this.cleanup();
   }

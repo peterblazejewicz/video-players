@@ -5,12 +5,19 @@ function nameFromUrl(url: string) {
   return url.replace(/[\:\/\%\?\&\.\=\-\,]/g, '_') + '_api';
 }
 
+interface ApiMap {
+  [name: string]: Loader;
+}
+
+const apiMapDictionary: ApiMap = {};
+
 @Injectable({
   providedIn: 'root'
 })
 export class LoadManagerService {
-  readonly apiMap: { [name: string]: Loader } = {};
-
+  get apiMap() {
+    return apiMapDictionary;
+  }
   /**
    * @static
    * @param {string} url
