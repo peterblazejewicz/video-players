@@ -9,7 +9,7 @@ interface ApiMap {
   [name: string]: Loader;
 }
 
-const apiMapDictionary: ApiMap = {};
+let apiMapDictionary: ApiMap = {};
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,9 @@ export class LoadManagerService {
       this.apiMap[name] = new Loader(name, url, jsonpCallbackName);
     }
     this.apiMap[name].requestNotify(notifyCallback);
+  }
+
+  cleanup() {
+    apiMapDictionary = {};
   }
 }

@@ -1,5 +1,5 @@
 export class Loader {
-  private callbackMacro = '%%callback%%'.toLowerCase();
+  private callbackMacro = '%%callback%%';
   private _error: Error;
   private loaded = false;
   private notifiers: Function[] = [];
