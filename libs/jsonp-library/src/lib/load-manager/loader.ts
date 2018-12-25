@@ -6,6 +6,12 @@ export class Loader {
   private result: any;
   private script: HTMLElement;
 
+  /**
+   * @public
+   * @readonly
+   * @type {Error}
+   * @memberof Loader
+   */
   get error(): Error {
     return this._error;
   }
@@ -46,7 +52,7 @@ export class Loader {
    * @param {Function} notifyCallback
    * @memberof Loader
    */
-  public requestNotify(notifyCallback: Function) {
+  public requestNotify(notifyCallback: (error: Error, result: any) => void) {
     if (this.loaded || this.error) {
       notifyCallback(this.error, this.result);
     } else {

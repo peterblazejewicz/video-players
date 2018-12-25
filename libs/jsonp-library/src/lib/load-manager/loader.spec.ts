@@ -47,19 +47,45 @@ describe('Loader', () => {
     expect(src).toEqual(defaultUrl);
   });
 
-  it('should call default callback when script loads', done => {
-    const loader = new Loader('my-loader', defaultUrl, defaultCallbackName);
-    spyOn(window, defaultCallbackName).and.callFake(() => {
-      expect(window[defaultCallbackName]).toBeDefined();
-      done();
-    });
-  });
-
   it('should call default callback when scripts load', done => {
     const loader = new Loader('my-loader', defaultUrl, defaultCallbackName);
     const spy = spyOn(window, defaultCallbackName).and.callFake(() => {
       expect(spy).toHaveBeenCalled();
       done();
     });
+  });
+
+  it('should not have an error after creating new instance with correct params', () => {
+    const loader = new Loader('my-loader', defaultUrl, defaultCallbackName);
+    expect(loader.error).toBeUndefined();
+  });
+
+  it('shuld have an error after creating new instance with invalid callback and url', () => {
+    const loader = new Loader('my-loader', undefined, undefined);
+    expect(loader.error).toBeDefined();
+  });
+
+  it('should call notify callback with an error when using invalid url', done => {
+    const notifyCallback = (error: Error, result: any) => {
+      expect(error).toBeDefined();
+      done();
+    };
+    const loader = new Loader(
+      'my-loader',
+      'http://example.com/404.js',
+      defaultCallbackName
+    );
+    loader.requestNotify(notifyCallback);
+  });
+
+  it('should call notify callback with results when using valid url', done => {
+    const notifyCallback = (error: Error, result: any) => {
+      expect(error).toBeUndefined();
+      expect(result).toBeDefined();
+      console.log(result);
+      done();
+    };
+    const loader = new Loader('my-loader', defaultUrl, defaultCallbackName);
+    loader.requestNotify(notifyCallback);
   });
 });
